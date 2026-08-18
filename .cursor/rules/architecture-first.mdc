@@ -1,0 +1,14 @@
+---
+description: Consult architecture before any change; reject contradictions; test inputs before commit
+alwaysApply: true
+---
+
+# Architecture-first changes
+
+Before any edit, read `ARCHITECTURE.md` and the repo layout. Identify the owning module.
+
+Do not shortcut the flow: bots/CLI/API → MatchingEngine → OrderBook → trades. Bots never write the book. Frontend and API contain no matching logic.
+
+Do not change matching rules, engine API (`submit`, `cancel`, `book`, `trades`), Order/Trade fields, `Decimal` prices, or module boundaries without updating `ARCHITECTURE.md` in the same change.
+
+After edits, run `pytest` including invalid inputs (qty ≤ 0, bad price, unknown side, duplicate id, empty symbol, missing cancel) and flow regressions (same-side, FIFO, partials, cancels, empty book). Never commit failing tests or architecture contradictions.

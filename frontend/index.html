@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ExchangeLab</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>ExchangeLab</h1>
+    <p class="sub">AAPL · live book from the matching engine</p>
+  </header>
+  <section class="metrics">
+    <div><span>Last</span><strong id="last">—</strong></div>
+    <div><span>Bid</span><strong id="bid">—</strong></div>
+    <div><span>Ask</span><strong id="ask">—</strong></div>
+    <div><span>Spread</span><strong id="spread">—</strong></div>
+    <div><span>Latency</span><strong id="latency">—</strong></div>
+    <div><span>Tick</span><strong id="tick">0</strong></div>
+  </section>
+  <main>
+    <section>
+      <h2>Order book</h2>
+      <pre id="book"></pre>
+    </section>
+    <section>
+      <h2>Recent trades</h2>
+      <svg id="chart" viewBox="0 0 300 80" preserveAspectRatio="none"></svg>
+      <ul id="trades"></ul>
+    </section>
+    <section>
+      <h2>Bots</h2>
+      <table>
+        <thead>
+          <tr><th>Bot</th><th>Cash</th><th>Inv</th><th>Trades</th><th>PnL</th></tr>
+        </thead>
+        <tbody id="bots"></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
