@@ -39,6 +39,8 @@ class Simulator:
         self.bots = bots
         self.symbol = symbol
         self.tick = 0
+        self.bots_running = True
+        self.starting_cash = starting_cash
         self.states = {
             bot.trader_id: BotState(
                 trader_id=bot.trader_id,
@@ -47,6 +49,27 @@ class Simulator:
             )
             for bot in bots
         }
+
+    def pause(self) -> None:
+        """Stop bot quoting; engine and human/API orders still work."""
+        self.bots_running = False
+
+    def resume(self) -> None:
+        self.bots_running = True
+
+    def ensure_trader(self, trader_id: str) -> BotState:
+        """Register a human/API trader on the same cash/inventory ledger as bots."""
+        if trader_id not in self.states:
+            self.states[trader_id] = BotState(
+                trader_id=trader_id,
+                cash=self.starting_cash,
+                starting_cash=self.starting_cash,
+            )
+        return self.states[trader_id]
+
+    def record_trades(self, trades: list[Trade]) -> None:
+        """Apply fills to any known participants (bots or ensure_trader humans)."""
+        self._apply_trades(trades)
 
     def market_view(self) -> MarketView:
         book = self.engine.book(self.symbol)
@@ -61,6 +84,8 @@ class Simulator:
         )
 
     def step(self) -> list[Trade]:
+        if not self.bots_running:
+            return []
         view = self.market_view()
         produced: list[Trade] = []
         for bot in self.bots:
@@ -91,6 +116,7 @@ class Simulator:
         return {
             "tick": self.tick,
             "symbol": self.symbol,
+            "bots_running": self.bots_running,
             "best_bid": str(view.best_bid) if view.best_bid is not None else None,
             "best_ask": str(view.best_ask) if view.best_ask is not None else None,
             "spread": str(view.book.spread) if view.book.spread is not None else None,

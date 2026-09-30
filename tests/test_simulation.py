@@ -39,3 +39,43 @@ def test_momentum_trader_emits_orders_after_trend():
     actions = bot.on_tick(sim.market_view())
     assert actions
     assert actions[0].order.side is Side.BUY
+
+
+def test_pause_stops_bot_activity():
+    engine = MatchingEngine()
+    mm = MarketMaker(trader_id="mm", quantity=5, spread=Decimal("0.20"))
+    sim = Simulator(engine, [mm])
+    sim.run(5)
+    tick_before = sim.tick
+    trades_before = len(engine.trades())
+    sim.pause()
+    assert sim.bots_running is False
+    sim.run(20)
+    assert sim.tick == tick_before
+    assert len(engine.trades()) == trades_before
+    sim.resume()
+    sim.run(5)
+    assert sim.tick == tick_before + 5
+
+
+def test_human_trader_pnl_updates_on_fill():
+    engine = MatchingEngine()
+    sim = Simulator(engine, [], starting_cash=Decimal("10000"))
+    engine.submit(Order(symbol="AAPL", side=Side.SELL, quantity=10, price=Decimal("50"), trader_id="maker"))
+    sim.ensure_trader("human")
+    buy = Order(
+        symbol="AAPL",
+        side=Side.BUY,
+        quantity=10,
+        price=Decimal("50"),
+        trader_id="human",
+    )
+    trades = engine.submit(buy)
+    sim.record_trades(trades)
+    human = sim.states["human"]
+    assert human.inventory["AAPL"] == 10
+    assert human.cash == Decimal("10000") - Decimal("500")
+    assert human.trade_count == 1
+    snap = sim.snapshot()
+    assert any(b["trader_id"] == "human" for b in snap["bots"])
+    assert snap["bots_running"] is True

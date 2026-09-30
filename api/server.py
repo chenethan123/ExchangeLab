@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import sys
 import threading
+import time
 from contextlib import asynccontextmanager
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -34,7 +35,11 @@ simulator = Simulator(
         MomentumTrader(trader_id="mom"),
     ],
 )
-_stats = {"orders": 0, "last_latency_ms": 0.0}
+_stats = {
+    "orders": 0,
+    "last_latency_ms": 0.0,
+    "started_at": time.perf_counter(),
+}
 
 
 class OrderIn(BaseModel):
@@ -43,19 +48,26 @@ class OrderIn(BaseModel):
     quantity: int = Field(gt=0)
     price: str | None = None
     order_type: str = "LIMIT"
-    trader_id: str = "api"
+    trader_id: str = "human"
     order_id: str | None = None
 
 
 def _submit(order: Order):
-    import time
-
     t0 = time.perf_counter()
     with _lock:
+        simulator.ensure_trader(order.trader_id)
         trades = engine.submit(order)
+        simulator.record_trades(trades)
         _stats["orders"] += 1
         _stats["last_latency_ms"] = (time.perf_counter() - t0) * 1000
         return trades
+
+
+def _orders_per_sec() -> float:
+    elapsed = time.perf_counter() - _stats["started_at"]
+    if elapsed <= 0:
+        return 0.0
+    return _stats["orders"] / elapsed
 
 
 @asynccontextmanager
@@ -105,6 +117,7 @@ def create_order(body: OrderIn):
         "order_id": order.order_id,
         "status": order.status.value,
         "remaining": order.remaining,
+        "trader_id": order.trader_id,
         "trades": [t.__dict__ | {"price": str(t.price), "timestamp": t.timestamp.isoformat()} for t in trades],
     }
 
@@ -116,6 +129,30 @@ def cancel_order(order_id: str):
     if not ok:
         raise HTTPException(404, "order not found")
     return {"cancelled": True}
+
+
+@app.post("/simulation/pause")
+def pause_simulation():
+    with _lock:
+        simulator.pause()
+        return {"bots_running": simulator.bots_running}
+
+
+@app.post("/simulation/resume")
+def resume_simulation():
+    with _lock:
+        simulator.resume()
+        return {"bots_running": simulator.bots_running}
+
+
+@app.get("/simulation")
+def get_simulation():
+    with _lock:
+        return {
+            "bots_running": simulator.bots_running,
+            "tick": simulator.tick,
+            "symbol": simulator.symbol,
+        }
 
 
 @app.get("/book/{symbol}")
@@ -156,6 +193,7 @@ def get_stats():
         snap = simulator.snapshot()
         snap["orders_submitted"] = _stats["orders"]
         snap["last_latency_ms"] = _stats["last_latency_ms"]
+        snap["orders_per_sec"] = round(_orders_per_sec(), 2)
         return snap
 
 

@@ -113,6 +113,12 @@ Tracked in `simulation/`, not the engine:
 
 `mark` is the mid price when a spread exists, otherwise last trade price.
 
+Human (API/CLI) traders may share the same ledger: `Simulator.ensure_trader(trader_id)` then `record_trades(trades)` after `MatchingEngine.submit`. Matching still happens only in the engine.
+
+## Simulation control
+
+`Simulator` owns the tick loop and bot pause flag (`bots_running`). When paused, `step()` advances nothing for bots (no bot submit/cancel); the engine and human/API orders still work. API adapters expose pause/resume; they do not contain matching logic.
+
 ## Out of scope for v1
 
 C++ rewrite, persistence, auth, real market data, self-trade prevention, stop/iceberg orders, auctions.

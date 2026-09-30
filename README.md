@@ -61,6 +61,21 @@ python cli.py
 
 Commands: `BUY 10 AAPL @ 200.00`, `SELL 5 AAPL @ 201.00`, `MARKET BUY 100 AAPL`, `CANCEL <id>`, `BOOK AAPL`, `TRADES`.
 
+Human trading against bots (API, no UI required):
+
+```
+# pause bots so the book is stable
+curl -X POST http://127.0.0.1:8000/simulation/pause
+
+# buy into resting liquidity (trader_id=human gets cash/inventory/PnL in /stats)
+curl -X POST http://127.0.0.1:8000/orders \
+  -H 'Content-Type: application/json' \
+  -d '{"side":"BUY","quantity":5,"price":"100.00","trader_id":"human"}'
+
+curl http://127.0.0.1:8000/stats
+curl -X POST http://127.0.0.1:8000/simulation/resume
+```
+
 Simulation:
 
 ```
