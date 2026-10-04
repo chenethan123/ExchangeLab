@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from enum import Enum
 
 
@@ -33,11 +33,16 @@ class InvalidOrderError(ValueError):
 def parse_price(price: Decimal | int | str | None) -> Decimal | None:
     if price is None:
         return None
-    if isinstance(price, Decimal):
-        return price
     if isinstance(price, float):
         raise InvalidOrderError("price must be Decimal, int, or str — not float")
-    return Decimal(str(price))
+    if not isinstance(price, Decimal):
+        try:
+            price = Decimal(str(price))
+        except InvalidOperation as exc:
+            raise InvalidOrderError(f"invalid price: {price}") from exc
+    if not price.is_finite():
+        raise InvalidOrderError("price must be a finite number")
+    return price
 
 
 @dataclass
@@ -61,7 +66,10 @@ class Order:
             except ValueError as exc:
                 raise InvalidOrderError(f"unknown side: {self.side}") from exc
         if isinstance(self.order_type, str):
-            self.order_type = OrderType(self.order_type.upper())
+            try:
+                self.order_type = OrderType(self.order_type.upper())
+            except ValueError as exc:
+                raise InvalidOrderError(f"unknown order type: {self.order_type}") from exc
         self.price = parse_price(self.price)
         self.remaining = self.quantity
         self.validate()

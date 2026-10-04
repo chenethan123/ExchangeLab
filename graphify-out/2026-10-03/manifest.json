@@ -60,9 +60,9 @@
     "semantic_hash": "1fd8b070c879424e7aefe1a962915feb"
   },
   "frontend/app.js": {
-    "mtime": 1791064842.4734936,
-    "seen": 1791064885.054786,
-    "ast_hash": "7b43e4be9e5bdb82d16406b567c36000",
+    "mtime": 1791063679.651493,
+    "seen": 1791063924.139461,
+    "ast_hash": "5cfae5802dd83f1f004b72254b3ed6da",
     "semantic_hash": ""
   },
   "simulation/__init__.py": {
@@ -174,9 +174,9 @@
     "semantic_hash": ""
   },
   "frontend/index.html": {
-    "mtime": 1791064763.965169,
-    "seen": 1791064885.0552251,
-    "ast_hash": "9c71a36f1be89055baa20f38d87ee6c2",
+    "mtime": 1791063431.7119877,
+    "seen": 1791063924.139682,
+    "ast_hash": "3a472f35bda9f05579f49a378ddd3bb8",
     "semantic_hash": ""
   },
   "requirements.txt": {
@@ -216,9 +216,9 @@
     "semantic_hash": ""
   },
   "frontend/charts.js": {
-    "mtime": 1791064732.3520608,
-    "seen": 1791064885.054788,
-    "ast_hash": "63e13fc691e02926d7ce8cdc8a457c85",
+    "mtime": 1791063894.1318216,
+    "seen": 1791063924.139462,
+    "ast_hash": "51de57a169ad3b642488a62dc7eff153",
     "semantic_hash": ""
   },
   "marketdata/__init__.py": {

@@ -1,0 +1,469 @@
+{
+  "communities": {
+    "0": [
+      "action",
+      "api_server",
+      "api_server_cancel_order",
+      "api_server_lifespan",
+      "api_server_rationale_1",
+      "delete",
+      "fastapi",
+      "protocol",
+      "simulation_init",
+      "simulation_market",
+      "simulation_market_marketview",
+      "simulation_market_marketview_best_ask",
+      "simulation_market_marketview_best_bid",
+      "simulation_market_marketview_mid",
+      "simulation_market_py_decimal",
+      "simulation_market_rationale_1",
+      "simulation_simulator",
+      "simulation_simulator_botstate",
+      "simulation_simulator_botstate_pnl",
+      "simulation_simulator_py_decimal",
+      "simulation_simulator_rationale_1",
+      "simulation_simulator_simulator",
+      "simulation_simulator_simulator_apply_trades",
+      "simulation_simulator_simulator_init",
+      "simulation_simulator_simulator_market_view",
+      "simulation_simulator_simulator_run",
+      "simulation_simulator_simulator_snapshot",
+      "simulation_simulator_simulator_step",
+      "strategies_base",
+      "strategies_base_bot",
+      "strategies_base_bot_on_tick",
+      "strategies_base_cancel",
+      "strategies_base_rationale_1",
+      "strategies_base_submit",
+      "strategies_init",
+      "strategies_market_maker",
+      "strategies_market_maker_marketmaker",
+      "strategies_market_maker_marketmaker_init",
+      "strategies_market_maker_marketmaker_on_tick",
+      "strategies_market_maker_py_decimal",
+      "strategies_market_maker_rationale_1",
+      "strategies_momentum",
+      "strategies_momentum_momentumtrader",
+      "strategies_momentum_momentumtrader_init",
+      "strategies_momentum_momentumtrader_on_tick",
+      "strategies_momentum_py_decimal",
+      "strategies_momentum_rationale_1",
+      "strategies_random_trader",
+      "strategies_random_trader_py_decimal",
+      "strategies_random_trader_randomtrader",
+      "strategies_random_trader_randomtrader_init",
+      "strategies_random_trader_randomtrader_on_tick",
+      "strategies_random_trader_rationale_1",
+      "tests_test_simulation",
+      "tests_test_simulation_rationale_1",
+      "tests_test_simulation_test_momentum_trader_emits_orders_after_trend",
+      "tests_test_simulation_test_simulator_updates_cash_inventory_and_pnl"
+    ],
+    "1": [
+      "api_server_create_order",
+      "api_server_orderin",
+      "api_server_submit",
+      "basemodel",
+      "deque",
+      "engine_order_book_indexedorderbook",
+      "engine_order_book_indexedorderbook_add",
+      "engine_order_book_indexedorderbook_best_ask",
+      "engine_order_book_indexedorderbook_best_bid",
+      "engine_order_book_indexedorderbook_cancel",
+      "engine_order_book_indexedorderbook_fill_best",
+      "engine_order_book_indexedorderbook_get",
+      "engine_order_book_indexedorderbook_init",
+      "engine_order_book_indexedorderbook_peek",
+      "engine_order_book_indexedorderbook_view",
+      "engine_order_book_listorderbook_fill_best",
+      "engine_order_book_rationale_64",
+      "engine_order_book_rationale_87",
+      "engine_order_invalidordererror",
+      "engine_order_order",
+      "engine_order_order_is_active",
+      "engine_order_order_post_init",
+      "engine_order_order_validate",
+      "engine_order_parse_price",
+      "engine_order_py_decimal",
+      "engine_order_rationale_30",
+      "post",
+      "tests_test_orders",
+      "tests_test_orders_rationale_1",
+      "tests_test_orders_test_duplicate_order_id_rejected",
+      "tests_test_orders_test_empty_book_best_prices",
+      "tests_test_orders_test_limit_order_fields",
+      "tests_test_orders_test_market_order_has_no_price",
+      "tests_test_orders_test_market_order_rejects_price",
+      "tests_test_orders_test_rejects_empty_symbol",
+      "tests_test_orders_test_rejects_float_price",
+      "tests_test_orders_test_rejects_non_positive_limit_price",
+      "tests_test_orders_test_rejects_non_positive_quantity",
+      "tests_test_orders_test_rejects_unknown_side",
+      "tests_test_orders_test_resting_orders_set_best_bid_and_ask"
+    ],
+    "2": [
+      "benchmarks_benchmark",
+      "benchmarks_benchmark_format_submit",
+      "benchmarks_benchmark_main",
+      "benchmarks_benchmark_run_cancel_bench",
+      "benchmarks_benchmark_run_submit_bench",
+      "benchmarks_benchmark_synthetic_orders",
+      "engine_order",
+      "engine_order_orderstatus",
+      "engine_order_ordertype",
+      "engine_order_rationale_1",
+      "engine_order_side",
+      "enum",
+      "fixture",
+      "tests_conftest",
+      "tests_conftest_engine",
+      "tests_conftest_limit_order",
+      "tests_conftest_make_engine",
+      "tests_test_cancellation",
+      "tests_test_cancellation_rationale_1",
+      "tests_test_cancellation_test_cancel_already_filled_returns_false",
+      "tests_test_cancellation_test_cancel_missing_id_returns_false",
+      "tests_test_cancellation_test_cancelled_order_cannot_execute",
+      "tests_test_market_orders",
+      "tests_test_market_orders_rationale_1",
+      "tests_test_market_orders_test_market_buy_walks_multiple_levels",
+      "tests_test_market_orders_test_market_on_empty_book_does_not_crash",
+      "tests_test_market_orders_test_market_order_larger_than_liquidity_does_not_rest",
+      "tests_test_matching",
+      "tests_test_matching_rationale_1",
+      "tests_test_matching_test_buy_does_not_match_buy",
+      "tests_test_matching_test_crossing_orders_execute_at_maker_price",
+      "tests_test_matching_test_fully_filled_orders_leave_the_book",
+      "tests_test_matching_test_non_crossing_limit_rests",
+      "tests_test_matching_test_partial_fill_leaves_remaining",
+      "tests_test_matching_test_sell_does_not_match_sell",
+      "tests_test_matching_test_symbols_are_isolated",
+      "tests_test_priority",
+      "tests_test_priority_rationale_1",
+      "tests_test_priority_test_better_price_beats_earlier_order",
+      "tests_test_priority_test_same_price_respects_time_priority"
+    ],
+    "3": [
+      "engine_init",
+      "engine_matching_engine",
+      "engine_matching_engine_matchingengine_book",
+      "engine_matching_engine_rationale_1",
+      "engine_order_book",
+      "engine_order_book_active_level",
+      "engine_order_book_aggregate_levels",
+      "engine_order_book_listorderbook",
+      "engine_order_book_listorderbook_add",
+      "engine_order_book_listorderbook_best_ask",
+      "engine_order_book_listorderbook_best_bid",
+      "engine_order_book_listorderbook_cancel",
+      "engine_order_book_listorderbook_get",
+      "engine_order_book_listorderbook_init",
+      "engine_order_book_listorderbook_view",
+      "engine_order_book_py_decimal",
+      "engine_order_book_rationale_1",
+      "engine_order_book_rationale_23",
+      "engine_trade",
+      "engine_trade_orderbookview",
+      "engine_trade_orderbookview_best_ask",
+      "engine_trade_orderbookview_best_bid",
+      "engine_trade_orderbookview_mid",
+      "engine_trade_orderbookview_spread",
+      "engine_trade_pricelevel",
+      "engine_trade_py_decimal",
+      "engine_trade_rationale_1"
+    ],
+    "4": [
+      "cli",
+      "cli_format_book",
+      "cli_handle",
+      "cli_main",
+      "cli_parse_order",
+      "cli_rationale_1",
+      "engine_matching_engine_matchingengine",
+      "engine_matching_engine_matchingengine_cancel",
+      "engine_matching_engine_matchingengine_init",
+      "engine_matching_engine_matchingengine_match_incoming",
+      "engine_matching_engine_matchingengine_record_trade",
+      "engine_matching_engine_matchingengine_submit",
+      "engine_matching_engine_matchingengine_trades",
+      "engine_trade_trade",
+      "tests_test_cli",
+      "tests_test_cli_test_cli_cancel_missing",
+      "tests_test_cli_test_cli_invalid_quantity",
+      "tests_test_cli_test_cli_limit_and_book_display",
+      "tests_test_cli_test_cli_rejects_unknown_side",
+      "valueerror"
+    ],
+    "5": [
+      "architecture_indexedorderbook",
+      "architecture_listorderbook",
+      "architecture_orderbook",
+      "finance_project_benchmarking",
+      "finance_project_limit_order_book",
+      "finance_project_limit_orders",
+      "finance_project_order_cancellation",
+      "finance_project_v1_naive",
+      "finance_project_v2_optimized",
+      "readme_throughput_benchmarks",
+      "readme_v1_list_book",
+      "readme_v2_indexed_book",
+      "requirements_sortedcontainers"
+    ],
+    "6": [
+      "architecture_price_time_priority",
+      "finance_project_frontend_secondary",
+      "finance_project_market_orders",
+      "finance_project_matching_engine",
+      "finance_project_partial_fills",
+      "finance_project_price_time_priority",
+      "finance_project_python_first",
+      "finance_project_trade_execution",
+      "readme_price_time_priority"
+    ],
+    "7": [
+      "architecture_benchmark",
+      "architecture_cli_adapter",
+      "architecture_market_order_leftover",
+      "architecture_matchingengine",
+      "architecture_order",
+      "architecture_self_trade_policy",
+      "architecture_trade",
+      "architecture_trade_log"
+    ],
+    "8": [
+      "api_server_get_book",
+      "api_server_get_stats",
+      "api_server_get_trades",
+      "api_server_index",
+      "api_server_ws",
+      "get",
+      "websocket"
+    ],
+    "9": [
+      "architecture_pnl",
+      "architecture_tradingbots",
+      "frontend_index_bots_table",
+      "frontend_index_exchangelab_dashboard",
+      "frontend_index_live_metrics",
+      "frontend_index_order_book_view",
+      "frontend_index_trades_chart"
+    ],
+    "10": [
+      "finance_project_2_exchangelab_plan",
+      "finance_project_exchangelab_plan",
+      "finance_project_js_building_exchange",
+      "finance_project_js_interview_prep",
+      "finance_project_jsip",
+      "finance_project_primary_objectives",
+      "readme_week_progression"
+    ],
+    "11": [
+      "finance_project_market_maker",
+      "finance_project_momentum_trader",
+      "finance_project_random_trader",
+      "readme_market_maker",
+      "readme_momentum_trader",
+      "readme_random_trader",
+      "readme_simulator"
+    ],
+    "12": [
+      "architecture_api_adapter",
+      "architecture_dashboard",
+      "requirements_fastapi",
+      "requirements_httpx",
+      "requirements_uvicorn"
+    ],
+    "13": [
+      "finance_project_testing",
+      "readme_decimal_prices",
+      "readme_matching_engine",
+      "readme_pytest_suite",
+      "requirements_pytest"
+    ],
+    "14": [
+      "frontend_app",
+      "frontend_app_poll",
+      "frontend_app_render",
+      "frontend_app_renderbook",
+      "frontend_app_renderchart"
+    ],
+    "15": [
+      "architecture_change_protocol",
+      "architecture_exchangelab",
+      "architecture_module_boundaries",
+      "readme_exchangelab"
+    ],
+    "16": [
+      "api_init"
+    ],
+    "17": [
+      "benchmarks_init"
+    ]
+  },
+  "cohesion": {
+    "0": 0.08583959899749373,
+    "1": 0.09487179487179487,
+    "2": 0.1371794871794872,
+    "3": 0.13105413105413105,
+    "4": 0.21052631578947367,
+    "5": 0.23076923076923078,
+    "6": 0.2222222222222222,
+    "7": 0.2857142857142857,
+    "8": 0.38095238095238093,
+    "9": 0.2857142857142857,
+    "10": 0.2857142857142857,
+    "11": 0.2857142857142857,
+    "12": 0.4,
+    "13": 0.4,
+    "14": 0.7,
+    "15": 0.5,
+    "16": 1.0,
+    "17": 1.0
+  },
+  "gods": [
+    {
+      "id": "engine_order_order",
+      "label": "Order",
+      "degree": 68
+    },
+    {
+      "id": "engine_order_side",
+      "label": "Side",
+      "degree": 55
+    },
+    {
+      "id": "engine_matching_engine_matchingengine",
+      "label": "MatchingEngine",
+      "degree": 38
+    },
+    {
+      "id": "engine_order_invalidordererror",
+      "label": "InvalidOrderError",
+      "degree": 24
+    },
+    {
+      "id": "simulation_market_marketview",
+      "label": "MarketView",
+      "degree": 22
+    },
+    {
+      "id": "engine_order_book_indexedorderbook",
+      "label": "IndexedOrderBook",
+      "degree": 20
+    },
+    {
+      "id": "tests_conftest_limit_order",
+      "label": "limit_order()",
+      "degree": 20
+    },
+    {
+      "id": "engine_order_ordertype",
+      "label": "OrderType",
+      "degree": 19
+    },
+    {
+      "id": "engine_order_book_listorderbook",
+      "label": "ListOrderBook",
+      "degree": 19
+    },
+    {
+      "id": "simulation_simulator_simulator",
+      "label": "Simulator",
+      "degree": 18
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Matching Engine (Plan)",
+      "target": "MatchingEngine",
+      "source_files": [
+        "Finance_Project.pdf",
+        "ARCHITECTURE.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; bridges separate communities; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Limit Order Book",
+      "target": "OrderBook",
+      "source_files": [
+        "Finance_Project.pdf",
+        "ARCHITECTURE.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Version 1 Naive Lists",
+      "target": "ListOrderBook (v1)",
+      "source_files": [
+        "Finance_Project.pdf",
+        "ARCHITECTURE.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Version 2 Optimized Book",
+      "target": "IndexedOrderBook (v2)",
+      "source_files": [
+        "Finance_Project.pdf",
+        "ARCHITECTURE.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Price-Time Priority (Plan)",
+      "target": "Price-Time Priority",
+      "source_files": [
+        "Finance_Project.pdf",
+        "ARCHITECTURE.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ paper); connects across different repos/directories; semantically similar concepts with no structural link"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Order` connect `Community 1` to `Community 0`, `Community 2`, `Community 3`, `Community 4`?",
+      "why": "High betweenness centrality (0.152) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Side` connect `Community 2` to `Community 0`, `Community 1`, `Community 3`, `Community 4`?",
+      "why": "High betweenness centrality (0.091) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `MatchingEngine` connect `Community 4` to `Community 0`, `Community 1`, `Community 2`, `Community 3`?",
+      "why": "High betweenness centrality (0.079) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 10 inferred relationships involving `Order` (e.g. with `_submit()` and `run_submit_bench()`) actually correct?",
+      "why": "`Order` has 10 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 33 inferred relationships involving `Side` (e.g. with `run_cancel_bench()` and `synthetic_orders()`) actually correct?",
+      "why": "`Side` has 33 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 11 inferred relationships involving `MatchingEngine` (e.g. with `handle()` and `IndexedOrderBook`) actually correct?",
+      "why": "`MatchingEngine` has 11 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 11 inferred relationships involving `InvalidOrderError` (e.g. with `create_order()` and `handle()`) actually correct?",
+      "why": "`InvalidOrderError` has 11 INFERRED edges - model-reasoned connections that need verification."
+    }
+  ]
+}

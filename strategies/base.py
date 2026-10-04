@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from decimal import ROUND_HALF_EVEN, Decimal
 from typing import TYPE_CHECKING, Protocol
 
 from engine.order import Order
@@ -22,6 +23,13 @@ class Cancel:
 
 
 Action = Submit | Cancel
+
+TICK = Decimal("0.01")
+
+
+def to_tick(price: Decimal, rounding: str = ROUND_HALF_EVEN, tick: Decimal = TICK) -> Decimal:
+    """Snap a bot price onto the tick grid. The engine itself accepts any positive Decimal."""
+    return (price / tick).to_integral_value(rounding=rounding) * tick
 
 
 class Bot(Protocol):

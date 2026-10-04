@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from decimal import Decimal
+from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal
 
 from engine.order import Order, Side
 from simulation.market import MarketView
-from strategies.base import Submit
+from strategies.base import Submit, to_tick
 
 
 class MomentumTrader:
@@ -33,7 +33,10 @@ class MomentumTrader:
             return []
         side = Side.BUY if delta > 0 else Side.SELL
         mid = view.mid or prices[-1]
-        price = mid + self.offset if side is Side.BUY else mid - self.offset
+        if side is Side.BUY:
+            price = to_tick(mid + self.offset, ROUND_CEILING)
+        else:
+            price = to_tick(mid - self.offset, ROUND_FLOOR)
         if price <= 0:
             return []
         return [

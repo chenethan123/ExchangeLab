@@ -98,3 +98,14 @@ def test_resting_orders_set_best_bid_and_ask(engine):
     assert view.best_bid == Decimal("200")
     assert view.best_ask == Decimal("201")
     assert view.spread == Decimal("1")
+
+
+@pytest.mark.parametrize("price", ["NaN", "Infinity", "-Infinity", "abc", Decimal("NaN")])
+def test_rejects_non_finite_or_garbage_price(price):
+    with pytest.raises(InvalidOrderError):
+        Order(symbol="AAPL", side=Side.BUY, quantity=1, price=price)
+
+
+def test_rejects_unknown_order_type():
+    with pytest.raises(InvalidOrderError, match="order type"):
+        Order(symbol="AAPL", side=Side.BUY, quantity=1, price=Decimal("10"), order_type="STOP")

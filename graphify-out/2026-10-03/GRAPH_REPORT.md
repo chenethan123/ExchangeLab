@@ -1,11 +1,11 @@
 # Graph Report - Finance Project  (2026-10-03)
 
 ## Corpus Check
-- 38 files · ~19,186 words
+- 38 files · ~18,738 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 483 nodes · 1305 edges · 19 communities (18 shown, 1 thin omitted)
+- 482 nodes · 1300 edges · 24 communities (23 shown, 1 thin omitted)
 - Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 156 edges (avg confidence: 0.93)
 - Token cost: 0 input · 0 output
 
@@ -16,7 +16,8 @@
 
 ## Community Hubs (Navigation)
 - MarketView
-- test_session.py
+- test_api.py
+- yahoo.py
 - OrderBookView
 - MatchingEngine
 - IndexedOrderBook (v2)
@@ -32,6 +33,10 @@
 - ExchangeLab
 - CLAUDE.md
 - Order
+- test_session.py
+- parse_chart
+- Session
+- TimedMatchingEngine
 
 ## God Nodes (most connected - your core abstractions)
 1. `Order` - 77 edges
@@ -65,15 +70,19 @@
 - **Simulated Trading Agent Strategies** — readme_random_trader, readme_market_maker, readme_momentum_trader, finance_project_random_trader, finance_project_market_maker, finance_project_momentum_trader [INFERRED 0.85]
 - **v1 List to v2 Indexed Order Book Engineering Story** — architecture_listorderbook, architecture_indexedorderbook, finance_project_v1_naive, finance_project_v2_optimized, readme_throughput_benchmarks [INFERRED 0.95]
 
-## Communities (19 total, 1 thin omitted)
+## Communities (24 total, 1 thin omitted)
 
 ### Community 0 - "MarketView"
 Cohesion: 0.11
-Nodes (29): Action, Protocol, MarketView, Decimal, Read-only market snapshot for bots. Matching stays in the engine., Bot, Cancel, Decimal (+21 more)
+Nodes (31): Action, The standard three bots, with price-denominated settings scaled to the seed.…, scaled_bots(), Protocol, MarketView, Decimal, Read-only market snapshot for bots. Matching stays in the engine., Bot (+23 more)
 
-### Community 2 - "test_session.py"
-Cohesion: 0.08
-Nodes (32): Exception, _cents(), fetch_quote(), normalize_symbol(), parse_chart(), Decimal, Quote, QuoteError (+24 more)
+### Community 1 - "test_api.py"
+Cohesion: 0.33
+Nodes (10): _fresh_app_state(), API adapter tests: no matching logic in the server — only wiring., test_filled_orders_drop_out_of_open_orders(), test_human_order_updates_stats_and_ledger(), test_open_orders_list_and_cancel(), test_pause_resume_endpoints(), test_reject_bad_order_type_and_non_finite_price_via_api(), test_reject_invalid_quantity_via_api() (+2 more)
+
+### Community 2 - "yahoo.py"
+Cohesion: 0.23
+Nodes (12): Exception, _cents(), fetch_quote(), Decimal, Quote, QuoteError, QuoteNotFound, One-shot Yahoo Finance quote lookup used to seed a simulated session. This is… (+4 more)
 
 ### Community 3 - "OrderBookView"
 Cohesion: 0.21
@@ -81,7 +90,7 @@ Nodes (8): _active_level(), _aggregate_levels(), Decimal, Per-symbol limit order
 
 ### Community 4 - "MatchingEngine"
 Cohesion: 0.10
-Nodes (21): format_book(), handle(), main(), MatchingEngine, Trade, BotState, Decimal, Tick loop: bots see a MarketView, then submit/cancel through MatchingEngine. (+13 more)
+Nodes (24): format_book(), handle(), main(), parse_order(), CLI adapter. No matching logic — all orders go through MatchingEngine., MatchingEngine, Trade, BotState (+16 more)
 
 ### Community 5 - "IndexedOrderBook (v2)"
 Cohesion: 0.23
@@ -96,8 +105,8 @@ Cohesion: 0.29
 Nodes (8): Benchmark, CLI Adapter, Market Order Leftover Not Rested, MatchingEngine, Order, Self-Trades Allowed (v1), Trade, Trade Log
 
 ### Community 8 - "server.py"
-Cohesion: 0.06
-Nodes (45): cancel_order(), get_book(), get_session(), get_simulation(), get_stats(), get_trades(), index(), lifespan() (+37 more)
+Cohesion: 0.17
+Nodes (18): cancel_order(), get_book(), get_session(), get_simulation(), get_stats(), get_trades(), index(), lifespan() (+10 more)
 
 ### Community 9 - "ExchangeLab Dashboard UI"
 Cohesion: 0.29
@@ -121,7 +130,7 @@ Nodes (15): Chart, DepthChart, fmtInt(), fmtTime(), nearestIndex(), niceTicks(),
 
 ### Community 14 - "app.js"
 Cohesion: 0.09
-Nodes (75): api(), applySession(), bestPrices(), BUCKET_STEPS, bucketFor(), buildSuggestions(), cancelAll(), cancelOrder() (+67 more)
+Nodes (74): api(), applySession(), bestPrices(), BUCKET_STEPS, bucketFor(), buildSuggestions(), cancelAll(), cancelOrder() (+66 more)
 
 ### Community 15 - "ExchangeLab"
 Cohesion: 0.50
@@ -129,7 +138,23 @@ Nodes (4): Architecture Change Protocol, ExchangeLab, Module Boundaries, Exchang
 
 ### Community 19 - "Order"
 Cohesion: 0.06
-Nodes (62): create_order(), _submit(), format_submit(), main(), run_cancel_bench(), run_submit_bench(), synthetic_orders(), parse_order() (+54 more)
+Nodes (59): create_order(), _submit(), format_submit(), main(), run_cancel_bench(), run_submit_bench(), synthetic_orders(), Matching engine: the only component that matches orders or mutates books.… (+51 more)
+
+### Community 20 - "test_session.py"
+Cohesion: 0.15
+Nodes (8): client(), FakeProvider, fixture, parametrize, Choosing a stock: one quote fetch, then a fresh simulated market seeded at that…, test_bot_settings_scale_with_price(), test_malformed_symbol_rejected_without_fetch(), test_network_failure_keeps_current_market()
+
+### Community 21 - "parse_chart"
+Cohesion: 0.26
+Nodes (12): normalize_symbol(), parse_chart(), Upper-case and validate a ticker. Raises ValueError for malformed input., Turn a chart-endpoint JSON payload into a Quote (separate for testing)., _payload(), parametrize, Yahoo chart payload parsing (no network)., test_normalize_symbol() (+4 more)
+
+### Community 22 - "Session"
+Cohesion: 0.18
+Nodes (10): OrderIn, pause_simulation(), One simulated market: its own engine, bots, ledger and API-tracked orders., Fetch the latest quote once, then replace the running market with a fresh one., resume_simulation(), Session, SessionIn, start_session() (+2 more)
+
+### Community 23 - "TimedMatchingEngine"
+Cohesion: 0.24
+Nodes (5): Decimal, Adapter-side instrumentation: times every accepted submit (bots and humans).…, (orders/sec, avg latency ms) over the last STATS_WINDOW_S seconds., TimedMatchingEngine, deque
 
 ## Knowledge Gaps
 - **32 isolated node(s):** `KEYS`, `WINDOWS`, `BUCKET_STEPS`, `POPULAR`, `SERIES` (+27 more)
@@ -139,11 +164,11 @@ Nodes (62): create_order(), _submit(), format_submit(), main(), run_cancel_bench
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Order` connect `Order` to `server.py`, `MarketView`, `OrderBookView`, `MatchingEngine`?**
-  _High betweenness centrality (0.088) - this node is a cross-community bridge._
-- **Why does `Side` connect `Order` to `MarketView`, `server.py`, `OrderBookView`, `MatchingEngine`?**
+- **Why does `Order` connect `Order` to `MarketView`, `test_api.py`, `OrderBookView`, `MatchingEngine`, `server.py`, `Session`, `TimedMatchingEngine`?**
+  _High betweenness centrality (0.089) - this node is a cross-community bridge._
+- **Why does `Side` connect `Order` to `MarketView`, `test_api.py`, `OrderBookView`, `MatchingEngine`?**
   _High betweenness centrality (0.045) - this node is a cross-community bridge._
-- **Why does `MatchingEngine` connect `MatchingEngine` to `server.py`, `OrderBookView`, `Order`?**
+- **Why does `MatchingEngine` connect `MatchingEngine` to `server.py`, `OrderBookView`, `Order`, `TimedMatchingEngine`?**
   _High betweenness centrality (0.042) - this node is a cross-community bridge._
 - **Are the 14 inferred relationships involving `Order` (e.g. with `_order_json()` and `Session`) actually correct?**
   _`Order` has 14 INFERRED edges - model-reasoned connections that need verification._

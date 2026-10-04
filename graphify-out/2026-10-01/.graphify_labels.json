@@ -1,7 +1,8 @@
 {
-  "0": "MarketView",
-  "2": "test_session.py",
-  "3": "OrderBookView",
+  "0": "Simulator",
+  "1": "Order",
+  "2": "Side",
+  "3": "matching_engine.py",
   "4": "MatchingEngine",
   "5": "IndexedOrderBook (v2)",
   "6": "Matching Engine (Plan)",
@@ -9,13 +10,10 @@
   "8": "server.py",
   "9": "ExchangeLab Dashboard UI",
   "10": "ExchangeLab Jane Street Project Plan",
-  "11": "Matching Engine (README)",
+  "11": "Simulator",
   "12": "API Adapter",
-  "13": "charts.js",
   "14": "app.js",
   "15": "ExchangeLab",
   "16": "api/__init__.py",
-  "17": "benchmarks/__init__.py",
-  "18": "CLAUDE.md",
-  "19": "Order"
+  "17": "benchmarks/__init__.py"
 }

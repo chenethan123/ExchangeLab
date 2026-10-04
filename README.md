@@ -20,7 +20,7 @@ Dashboard (after install):
 uvicorn api.server:app --reload
 ```
 
-Open http://127.0.0.1:8000
+Open http://127.0.0.1:8000 to watch the book and trade against the bots from the **Trade** panel.
 
 ## Architecture
 
@@ -40,6 +40,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) before changing anything. Public engine A
 - Price-time priority and partial fills
 - Cancellation and trade history
 - Random trader, market maker, and momentum bots with cash / inventory / PnL
+- Dashboard trading panel: trade alongside the bots, see your fills, open orders, and PnL
 - v1 list book and v2 indexed price-level book
 - pytest suite and throughput benchmarks
 
@@ -60,6 +61,25 @@ python cli.py
 ```
 
 Commands: `BUY 10 AAPL @ 200.00`, `SELL 5 AAPL @ 201.00`, `MARKET BUY 100 AAPL`, `CANCEL <id>`, `BOOK AAPL`, `TRADES`.
+
+Dashboard (http://127.0.0.1:8000):
+
+- **Choose a stock** with the search bar (press `/`): popular tickers are suggested, or type any Yahoo ticker (`BRK-B`, `SPY`, `BTC-USD`). The server fetches its latest quote from Yahoo Finance **once**, throws away the current market, and starts a fresh simulated market at that price. From then on, only the bots and your orders move the price; Yahoo is not polled. **Reload quote** restarts the same stock from a fresh quote.
+- The header shows the company, the Yahoo quote the market was seeded from (and when), today's real intraday prices, the real day range, and how far the simulation has moved from the quote and from the previous close.
+- Light and dark themes (toggle in the top bar).
+
+- **Price** chart with your own fills marked, a volume chart under it, and a 1m / 5m / 15m / All window. Hover for details; click to load that price into the ticket.
+- **Market depth** chart (cumulative bids vs asks) and a **profit & loss** chart for every participant.
+- **Order book** ladder with size bars, a **trade tape** showing who traded with whom, and your **activity** log (including resting orders that bots fill).
+
+Trading:
+
+- Pick Buy/Sell, Limit/Market, quantity and price, then submit. Fills execute at the resting order's price.
+- Click any price in the order book to load it into the form (ask → buy, bid → sell).
+- Your resting orders appear under **Your open orders** with a Cancel button.
+- **Pause bots** freezes bot quoting so you can trade against a still book; **Resume bots** restarts it.
+- Your row in **Participants** shows cash, inventory and PnL on the same ledger as the bots.
+- The trader name is editable and remembered per browser. There is no authentication.
 
 Human trading against bots (API, no UI required):
 
@@ -154,6 +174,10 @@ v1 was not run at 1,000,000 orders: each submit scans the full lists, so cost gr
 - Single-threaded engine (API uses a lock)
 - No persistence, auth, or real market data
 - No self-trade prevention, stops, icebergs, or auctions
+- Yahoo Finance quotes come from an unofficial public endpoint; they may be delayed and the endpoint can change without notice
+- The momentum bot amplifies whatever trend starts, so simulated prices can move several percent within a minute of seeding
+- No exchange-enforced tick size (bots quote in cents; humans may send any positive price)
+- No authentication: any client can trade or cancel under any trader name
 - v1 cancel and best-price scan are O(n)
 
 ## Future improvements

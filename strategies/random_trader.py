@@ -7,7 +7,7 @@ from decimal import Decimal
 
 from engine.order import Order, Side
 from simulation.market import MarketView
-from strategies.base import Submit
+from strategies.base import Submit, to_tick
 
 
 class RandomTrader:
@@ -18,18 +18,20 @@ class RandomTrader:
         seed: int | None = None,
         max_qty: int = 10,
         tick: Decimal = Decimal("0.05"),
+        reference_price: Decimal = Decimal("100"),
     ) -> None:
         self.trader_id = trader_id
         self.symbol = symbol
         self.max_qty = max_qty
         self.tick = tick
+        self.reference_price = reference_price
         self._rng = random.Random(seed)
 
     def on_tick(self, view: MarketView) -> list[Submit]:
-        mid = view.mid or view.last_price or Decimal("100")
+        mid = view.mid or view.last_price or self.reference_price
         offset = self._rng.randint(-4, 4) * self.tick
         side = self._rng.choice([Side.BUY, Side.SELL])
-        price = mid + offset if side is Side.BUY else mid + offset
+        price = to_tick(mid + offset)
         if price <= 0:
             price = self.tick
         qty = self._rng.randint(1, self.max_qty)
