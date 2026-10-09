@@ -29,7 +29,6 @@ Yahoo Finance ──► marketdata/ ──► API Session seed   (once per stock
 
 ```
 ARCHITECTURE.md
-.cursor/rules/architecture-first.mdc
 engine/
   order.py              # Order, Side, OrderType, OrderStatus
   trade.py              # Trade, OrderBookView, PriceLevel

@@ -11,3 +11,16 @@ build/
 .coverage
 htmlcov/
 architecture_review.tex
+
+# Planning, AI-assistant, and personal files (kept locally, not in the repo)
+*.pdf
+*.tex
+CLAUDE.md
+.claude/
+.cursor/
+.cursorrules
+.cursorignore
+AGENTS.md
+graphify-out/
+.vscode/
+.idea/

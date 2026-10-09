@@ -161,7 +161,7 @@ v1 was not run at 1,000,000 orders: each submit scans the full lists, so cost gr
 
 ## Week-by-week progression
 
-0. **Change protocol** — `ARCHITECTURE.md` and `.cursor/rules/architecture-first.mdc`
+0. **Change protocol** — `ARCHITECTURE.md`
 1. **Orders and book** — `Order`, two-sided lists, best bid/ask, CLI display
 2. **Matching engine** — price-time priority, partial fills, market orders, cancel, trades
 3. **Tests** — pytest for matching, FIFO, cancels, market orders, invalid input
